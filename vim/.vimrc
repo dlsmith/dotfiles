@@ -31,7 +31,7 @@ set completeopt=
 " Set mapleader
 let mapleader=","
 
-" Switch between .h / .cc / _.test.*
+" Switch between .h / .cc / _test.*
 let pattern = '\(\(_test\)\?\.\(cc\|h\)\)$'
 nmap <leader>cc :e <C-R>=substitute(expand("%"), pattern, ".cc", "")<CR><CR>
 nmap <leader>h :e <C-R>=substitute(expand("%"), pattern, ".h", "")<CR><CR>
