@@ -31,6 +31,10 @@ set completeopt=
 " Set mapleader
 let mapleader=","
 
+" Make it easy to edit vimrc
+:nnoremap <leader>ev :tabnew $MYVIMRC<cr>
+:nnoremap <leader>sv :source $MYVIMRC<cr>
+
 " Switch between .h / .cc / _test.*
 let pattern = '\(\(_test\)\?\.\(cc\|h\)\)$'
 nmap <leader>cc :e <C-R>=substitute(expand("%"), pattern, ".cc", "")<CR><CR>
@@ -46,6 +50,10 @@ set incsearch
 set ruler
 set shell=/bin/bash
 
+" Keep search matches in the middle of the window
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 " Enable some helpful programming settings
 syntax on
 set shiftwidth=2
@@ -58,6 +66,22 @@ set smarttab
 set incsearch
 set showmatch
 set number
+
+" Folding
+set foldlevelstart=99
+nnoremap <Space> za
+vnoremap <Space> za
+vnoremap <C-Space> zf
+
+set foldmethod=manual
+
+function! FoldText()
+  let nl = v:foldend - v:foldstart + 1
+  let linetext = substitute(getline(v:foldstart),"^ *","",1)
+  let txt = '+ ' . linetext . ' (' . nl . ' lines)'
+  return txt
+endfunction
+"set foldtext=FoldText()
 
 " Save on losing focus
 "au FocusLost * :wa
@@ -96,8 +120,10 @@ nnoremap gj j
 
 " Make page up/down easier
 nnoremap K <C-u>
+vnoremap K <C-u>
 nnoremap <leader>j J
 nnoremap J <C-d>
+vnoremap J <C-d>
 
 " Make moving between splits easier
 nnoremap <C-h> <C-w>h
