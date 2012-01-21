@@ -2,6 +2,9 @@
 " Use vim settings
 set nocompatible
 
+" Enable pathogen for plugins
+call pathogen#infect()
+
 " Enable backups and keep in common directory
 set backupdir=~/.vim/backup
 set backup
@@ -16,6 +19,12 @@ elseif has('unix')
   set guifont=Inconsolata\ 12
 endif
 
+" Set mapleader
+let mapleader=","
+
+" Easy save and quit.
+nnoremap <leader><ESC> :wq<CR>
+
 " Do not redraw while running macros
 set lazyredraw
 
@@ -28,18 +37,18 @@ set backspace=indent,eol,start
 " Don't use a pop up menu for completions
 set completeopt=
 
-" Set mapleader
-let mapleader=","
+" Quick switching between current and last buffer
+nnoremap <leader><leader> <C-^>
 
 " Make it easy to edit vimrc
-:nnoremap <leader>ev :tabnew $MYVIMRC<cr>
-:nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>ev :tabnew $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" Switch between .h / .cc / _test.*
+" Switch between .h / .cc / _.test.* (r prefix stands for related)
 let pattern = '\(\(_test\)\?\.\(cc\|h\)\)$'
-nmap <leader>cc :e <C-R>=substitute(expand("%"), pattern, ".cc", "")<CR><CR>
-nmap <leader>h :e <C-R>=substitute(expand("%"), pattern, ".h", "")<CR><CR>
-nmap <leader>t :e <C-R>=substitute(expand("%"), pattern, "_test.", "") . substitute(expand("%:e"), "h", "cc", "")<CR><CR>
+nmap <leader>rc :e <C-R>=substitute(expand("%"), pattern, ".cc", "")<CR><CR>
+nmap <leader>rh :e <C-R>=substitute(expand("%"), pattern, ".h", "")<CR><CR>
+nmap <leader>rt :e <C-R>=substitute(expand("%"), pattern, "_test.", "") . substitute(expand("%:e"), "h", "cc", "")<CR><CR>
 
 " Some general settings
 set encoding=utf-8
@@ -75,16 +84,8 @@ vnoremap <C-Space> zf
 
 set foldmethod=manual
 
-function! FoldText()
-  let nl = v:foldend - v:foldstart + 1
-  let linetext = substitute(getline(v:foldstart),"^ *","",1)
-  let txt = '+ ' . linetext . ' (' . nl . ' lines)'
-  return txt
-endfunction
-"set foldtext=FoldText()
-
 " Save on losing focus
-"au FocusLost * :wa
+au FocusLost * :wa
 
 " Resize splits when window is resized
 au VimResized * exe "normal! \<c-w>="
@@ -125,6 +126,10 @@ nnoremap <leader>j J
 nnoremap J <C-d>
 vnoremap J <C-d>
 
+" Make tab switching easier
+nnoremap L gt
+nnoremap H gT
+
 " Make moving between splits easier
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -141,13 +146,10 @@ if has('gui_running')
 endif
 " ============================================================================ "
 
-" ============================ NERDTree settings ============================= "
-" NERDTree size
-let NERDTreeWinSize=50
-
-" NERDTree toggle
-nnoremap <F2> :NERDTreeToggle<CR>
-inoremap <F2> <ESC>:NERDTreeToggle<CR>
+" ================================ Ctrl-P settings =========================== "
+" Search by filename (not full path) by default
+let g:ctrlp_by_filename = 1
+let g:ctrlp_clear_cache_on_exit = 0
 " ============================================================================ "
 
 " ============================== LaTeX settings ============================== "
