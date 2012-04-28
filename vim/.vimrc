@@ -1,3 +1,6 @@
+" Set mapleader
+let mapleader=","
+
 " =========================== General vim settings =========================== "
 " Use vim settings
 set nocompatible
@@ -19,17 +22,11 @@ elseif has('unix')
   set guifont=Inconsolata\ 12
 endif
 
-" Set mapleader
-let mapleader=","
-
-" Easy save and quit.
-nnoremap <leader><ESC> :wq<CR>
-
 " Do not redraw while running macros
 set lazyredraw
 
 " Always switch to the current file directory
-set autochdir
+"set autochdir
 
 " All backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -76,6 +73,10 @@ set incsearch
 set showmatch
 set number
 
+" Use tab to move between bracket pairs.
+nnoremap <tab> %
+vnoremap <tab> %
+
 " Folding
 set foldlevelstart=99
 nnoremap <Space> za
@@ -85,7 +86,7 @@ vnoremap <C-Space> zf
 set foldmethod=manual
 
 " Save on losing focus
-au FocusLost * :wa
+au FocusLost * :silent! wall
 
 " Resize splits when window is resized
 au VimResized * exe "normal! \<c-w>="
@@ -102,8 +103,10 @@ set textwidth=78
 set formatoptions=tqrn1
 
 " Change color scheme
+set t_Co=256
 set background=dark
-colorscheme desert
+let g:zenburn_high_Contrast = 1
+colorscheme zenburn
 
 " Change so that movement isn't constrained
 set virtualedit+=block
@@ -138,18 +141,16 @@ nnoremap <C-l> <C-w>l
 
 " Remove MacVim UI stuff
 if has('gui_running')
-    set go-=T
-    set go-=l
-    set go-=L
-    set go-=r
-    set go-=R
+  set go-=T
+  set go-=l
+  set go-=L
+  set go-=r
+  set go-=R
 endif
-" ============================================================================ "
 
-" ================================ Ctrl-P settings =========================== "
-" Search by filename (not full path) by default
-let g:ctrlp_by_filename = 1
-let g:ctrlp_clear_cache_on_exit = 0
+" Pretty much works everywhere. Might as well use it.
+inoremap <c-a> <esc>I
+inoremap <c-e> <esc>A
 " ============================================================================ "
 
 " ============================== LaTeX settings ============================== "
