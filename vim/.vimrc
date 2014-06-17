@@ -1,11 +1,61 @@
+" TODO(dlsmith): This needs to be organized.
 " Set mapleader
 let mapleader=","
 
+" ================================= Pathogen ================================= "
+" TODO(dlsmith): Are any of the pathogen bundles still being used? If so migrate
+" to Vundle.
+call pathogen#infect()
+" ============================================================================ "
+
+" ================================== Vundle ================================== "
+" https://github.com/gmarik/vundle#readme
+filetype off  " Required!
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+" Self-manage Vundle
+Plugin 'gmarik/vundle'
+Plugin 'scrooloose/syntastic'
+Plugin 'SirVer/ultisnips'
+
+" Put errors in the location list automatically.
+let g:syntastic_always_populate_loc_list = 1
+" Java checking doesn't seem to work correctly.
+let g:syntastic_java_checkers=[]
+
+filetype plugin indent on
+" ============================================================================ "
+
 " =========================== General vim settings =========================== "
-" Use vim settings
+" Use vim settings.
 set nocompatible
 
+" UltiSnips.
+let g:UltiSnipsEditSnips="vertical"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+nnoremap <leader>es :UltiSnipsEdit<cr>
+
+" Markdown Vim Mode.
+" Disable folding.
+let g:vim_markdown_folding_disabled=1
+
+" YouCompleteMe.
+" Remove default <TAB> bindings, which are used for snippets.
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+nnoremap <leader>jd :YcmCompleter GoToDeclaration<CR>
+
 vnoremap <leader>ss :sort<cr>
+
+nnoremap <leader>qs :mks! vim-session<CR> :wqa<CR>
+
+" Tagbar settings.
+let g:tagbar_width = 50
+let g:tagbar_left = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_autoshowtag = 1
+nmap <leader>et :TagbarToggle<CR>
 
 " Scratch settings.
 nnoremap <silent> <leader>sc :Scratch<cr>
@@ -33,7 +83,7 @@ set pastetoggle=<F2>
 " Do not redraw while running macros
 set lazyredraw
 
-" All backspacing over everything in insert mode
+" Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
 
 " Don't use a pop up menu for completions
@@ -46,17 +96,14 @@ nnoremap <leader><leader> <C-^>
 nnoremap <leader>ev :tabnew $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" Switch between .h / .cc / _.test.* (r prefix stands for related)
-let pattern = '\(\(_test\)\?\.\(cc\|h\)\)$'
-nmap <leader>rc :e <C-R>=substitute(expand("%"), pattern, ".cc", "")<CR><CR>
-nmap <leader>rh :e <C-R>=substitute(expand("%"), pattern, ".h", "")<CR><CR>
-nmap <leader>rt :e <C-R>=substitute(expand("%"), pattern, "_test.", "") . substitute(expand("%:e"), "h", "cc", "")<CR><CR>
-
 " Explore the current file's directory.
-nmap <leader>ee :Ex<CR>
+nmap <leader>ee :Explore<CR>
+nmap <leader>eE :Texplore<CR>
 
 " Center screen on current line.
 nmap <leader>cc zz
+
+nmap <leader>dd :r !date<CR>
 
 " Some general settings
 set encoding=utf-8
@@ -102,18 +149,22 @@ au FocusLost * :silent! wall
 " Resize splits when window is resized
 au VimResized * exe "normal! \<c-w>="
 
-" Set line wrap
-set wm=2
-set textwidth=78
-
 " Formatting options (:help fo-table for info)
 set formatoptions=tqrn1
 
-" Change color scheme
+" Change color scheme.
 set t_Co=256
 set background=dark
 let g:zenburn_high_Contrast = 1
 colorscheme zenburn
+
+" Highlight column after 80 chars.
+set colorcolumn=81
+highlight ColorColumn ctermbg=darkgrey
+
+" Set line wrap
+set wm=2
+set textwidth=0  " 78.
 
 " Change so that movement isn't constrained
 set virtualedit+=block
@@ -164,5 +215,8 @@ inoremap <C-k> <Esc><Right>DA
 :cnoremap <Esc>b <S-Left>
 :cnoremap <Esc>f <S-Right>
 :cnoremap <Esc>d <S-right><Delete>
+
+" Expand context in diff mode to avoid folding.
+set diffopt+=context:99999
 
 " ============================================================================ "
