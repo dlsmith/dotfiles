@@ -23,7 +23,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_java_checkers=[]
 
 call vundle#end()
-filetype plugin indent on
 " ============================================================================ "
 
 " ================================= Pathogen ================================= "
@@ -154,7 +153,7 @@ au FocusLost * :silent! wall
 au VimResized * exe "normal! \<c-w>="
 
 " Formatting options (:help fo-table for info)
-set formatoptions=tqrn1
+set formatoptions=tqron1
 
 " Change color scheme.
 set t_Co=256
@@ -173,8 +172,8 @@ set textwidth=0  " 78.
 " Change so that movement isn't constrained
 set virtualedit+=block
 
-" Open vertical splits on right instead of left and horizontal splits on 
-" bottom instead of top
+" Open vertical splits on right instead of left and horizontal splits on bottom
+" instead of top
 set splitright
 set splitbelow
 
@@ -223,3 +222,5 @@ inoremap <C-k> <Esc><Right>DA
 " Expand context in diff mode to avoid folding.
 set diffopt+=context:99999
 " ============================================================================ "
+
+filetype plugin indent on
