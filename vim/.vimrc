@@ -1,6 +1,30 @@
 " TODO(dlsmith): This needs to be organized.
-" Set mapleader
+
+set nocompatible
 let mapleader=","
+
+" ================================== Vundle ================================== "
+filetype off
+
+set rtp+=~/.vim/bundle/vundle
+call vundle#begin()
+
+Plugin 'gmarik/vundle'
+Plugin 'scrooloose/syntastic'
+Plugin 'SirVer/ultisnips'
+
+if filereadable(expand('~/.google-specific.vim'))
+  source ~/.google-specific.vim
+endif
+
+" Put errors in the location list automatically.
+let g:syntastic_always_populate_loc_list = 1
+" Java checking doesn't seem to work correctly.
+let g:syntastic_java_checkers=[]
+
+call vundle#end()
+filetype plugin indent on
+" ============================================================================ "
 
 " ================================= Pathogen ================================= "
 " TODO(dlsmith): Are any of the pathogen bundles still being used? If so migrate
@@ -8,27 +32,7 @@ let mapleader=","
 call pathogen#infect()
 " ============================================================================ "
 
-" ================================== Vundle ================================== "
-" https://github.com/gmarik/vundle#readme
-filetype off  " Required!
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
-" Self-manage Vundle
-Plugin 'gmarik/vundle'
-Plugin 'scrooloose/syntastic'
-Plugin 'SirVer/ultisnips'
-
-" Put errors in the location list automatically.
-let g:syntastic_always_populate_loc_list = 1
-" Java checking doesn't seem to work correctly.
-let g:syntastic_java_checkers=[]
-
-filetype plugin indent on
-" ============================================================================ "
-
 " =========================== General vim settings =========================== "
-" Use vim settings.
-set nocompatible
 
 " UltiSnips.
 let g:UltiSnipsEditSnips="vertical"
@@ -218,5 +222,4 @@ inoremap <C-k> <Esc><Right>DA
 
 " Expand context in diff mode to avoid folding.
 set diffopt+=context:99999
-
 " ============================================================================ "
