@@ -9,9 +9,17 @@ filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
-Plugin 'gmarik/vundle'
-Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'gmarik/vundle'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'vim-scripts/Mark--Karkat'
+Plugin 'vim-scripts/YankRing.vim'
 
 if filereadable(expand('~/.google-specific.vim'))
   source ~/.google-specific.vim
@@ -23,12 +31,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_java_checkers=[]
 
 call vundle#end()
-" ============================================================================ "
-
-" ================================= Pathogen ================================= "
-" TODO(dlsmith): Are any of the pathogen bundles still being used? If so migrate
-" to Vundle.
-call pathogen#infect()
 " ============================================================================ "
 
 " =========================== General vim settings =========================== "
@@ -49,16 +51,27 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 nnoremap <leader>jd :YcmCompleter GoToDeclaration<CR>
 
+" Ctrl-P.
+:let g:ctrlp_map = '<leader>t'
+:let g:ctrlp_match_window_bottom = 1
+:let g:ctrlp_match_window_reversed = 0
+:let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
+:let g:ctrlp_working_path_mode = 0
+:let g:ctrlp_dotfiles = 0
+:let g:ctrlp_switch_buffer = 0
+
 vnoremap <leader>ss :sort<cr>
 
 nnoremap <leader>qs :mks! vim-session<CR> :wqa<CR>
 
-" Tagbar settings.
+" Tagbar.
 let g:tagbar_width = 50
-let g:tagbar_left = 1
 let g:tagbar_autofocus = 1
 let g:tagbar_autoshowtag = 1
-nmap <leader>et :TagbarToggle<CR>
+nmap <leader>vt :TagbarToggle<CR>
+
+" NERDTree.
+nmap <leader>vn :NERDTreeToggle<CR>
 
 " Scratch settings.
 nnoremap <silent> <leader>sc :Scratch<cr>
@@ -114,6 +127,8 @@ set scrolloff=3
 set visualbell
 set cursorline
 set incsearch
+set ignorecase
+set smartcase
 set ruler
 set shell=/bin/bash
 
@@ -218,6 +233,7 @@ inoremap <C-k> <Esc><Right>DA
 :cnoremap <Esc>b <S-Left>
 :cnoremap <Esc>f <S-Right>
 :cnoremap <Esc>d <S-right><Delete>
+:cnoremap <C-g>  <C-c>
 
 " Expand context in diff mode to avoid folding.
 set diffopt+=context:99999
