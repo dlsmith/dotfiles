@@ -11,6 +11,7 @@ call vundle#begin()
 
 Plugin 'SirVer/ultisnips'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'bogado/file-line'
 Plugin 'gmarik/vundle'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
@@ -49,7 +50,6 @@ let g:vim_markdown_folding_disabled=1
 " Remove default <TAB> bindings, which are used for snippets.
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-nnoremap <leader>jd :YcmCompleter GoToDeclaration<CR>
 
 " Ctrl-P.
 :let g:ctrlp_map = '<leader>t'
@@ -62,7 +62,7 @@ nnoremap <leader>jd :YcmCompleter GoToDeclaration<CR>
 
 vnoremap <leader>ss :sort<cr>
 
-nnoremap <leader>qs :mks! vim-session<CR> :wqa<CR>
+nnoremap <leader>qs :mks! .vim-session<CR> :wqa<CR>
 
 " Tagbar.
 let g:tagbar_width = 50
@@ -140,7 +140,7 @@ nnoremap N Nzzzv
 syntax on
 set shiftwidth=2
 set softtabstop=2
-set tabstop=8       " make sure hard tabs don't go unnoticed
+set tabstop=2
 set autoindent
 set smartindent
 set expandtab
