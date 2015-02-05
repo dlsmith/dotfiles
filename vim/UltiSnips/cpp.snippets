@@ -1,0 +1,117 @@
+# std::map.
+snippet map
+map<${1:key type}, ${2:value type}>$0
+endsnippet
+
+# std::hash_map.
+snippet hmap
+hash_map<${1:key type}, ${2:value type}>$0
+endsnippet
+
+# std::vector.
+snippet vect
+vector<${1:type}>${0}
+endsnippet
+
+# std::pair.
+snippet pair
+pair<${1:first type}, ${2:second type}>$0
+endsnippet
+
+# Namespace.
+snippet ns
+namespace ${1:name} {
+$2
+}  // namespace $1
+endsnippet
+
+# Anonymous namespace.
+snippet ans
+namespace {
+$1
+}  // namespace
+endsnippet
+
+# Class.
+snippet class
+class ${1:name} {
+ public:
+  $1(${2:arguments});
+
+  virtual ~$1();
+
+ private:
+  ${3:/* data */}
+
+  DISALLOW_COPY_AND_ASSIGN($1);
+};
+endsnippet
+
+# If.
+snippet if
+if (${1:/* condition */}) {
+  $2
+}$0
+endsnippet
+
+# Else if.
+snippet elif
+else if (${1:/* condition */) {
+  $2
+}$0
+endsnippet
+
+# Else.
+snippet else
+else {
+  $1
+}$0
+endsnippet
+
+# While loop.
+snippet while
+while (${1:/* condition */}) {
+  $2
+}$0
+endsnippet
+
+# For loop over index.
+snippet fori
+for (int ${1:ii} = 0; $1 < ${2:count}; ++$1) {
+  ${3:/* code */}
+}$0
+endsnippet
+
+# For each loop with const value.
+snippet forc
+for (const ${1:type}& ${2:value} : ${3:container}) {
+  ${4:/* code */}
+}$0
+endsnippet
+
+# For each loop with mutable value.
+snippet form
+for (${1:type}& ${2:value} : *${3:container}) {
+  ${4:/* code */}
+}$0
+endsnippet
+
+# Lambda.
+snippet lambda
+[this${1:, &arg}] -> ${2:return type} {
+  ${3:/* code */}
+}$0
+endsnippet
+
+# Main.
+snippet main
+#include "base/init_google.h"
+
+int main(int argc, char** argv) {
+  InitGoogle(argv[0], &argc, &argv, true);
+
+  ${1}
+
+  return 0;
+}
+endsnippet
