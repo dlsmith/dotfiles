@@ -37,6 +37,10 @@ call vundle#end()
 
 " =========================== General vim settings =========================== "
 
+" File/language skeletons.
+" E.g. :autocmd BufNewFile *.c 0r ~/vim/skeletons/skeleton.py
+:autocmd BufNewFile Gruntfile.js  0r ~/vim/skeletons/Gruntfile.js
+
 " UltiSnips.
 let g:UltiSnipsEditSnips="vertical"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
