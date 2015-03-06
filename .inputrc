@@ -1,7 +1,0 @@
-# Change to vi editing mode
-set editing-mode vi
-
-# Clear the menu-complete bindings so that my reflexes don't mistakingly
-# trigger them and end up cycling through the entire set of commands.
-"\C-p":
-"\C-n":
