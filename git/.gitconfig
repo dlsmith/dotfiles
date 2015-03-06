@@ -1,0 +1,9 @@
+[core]
+	editor = vim
+	quotepath = false
+[user]
+	email = david.lawrence.smith@gmail.com
+	name = David Smith
+[grep]
+	extendRegexp = true
+	lineNumber = true
