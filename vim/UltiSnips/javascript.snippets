@@ -1,18 +1,18 @@
 snippet fori "Indexed for loop"
-for (var ${1:i} = 0, len = ${2:array}.length; $1 < len; ++i) {
+for (var ${1:i} = 0, len = ${2:array}.length; $1 < len; ++$1) {
 	$2[$1]$0
 }
 endsnippet
 
 snippet fn "Create named function"
 function ${1:name}(${2}) {
-  $0
+	$0
 }
 endsnippet
 
 snippet afn "Create unnamed function"
 function(${1}) {
-  $0
+	$0
 }
 endsnippet
 
@@ -20,7 +20,7 @@ snippet mod "Create module"
 var ${1:ModuleName} = (function() {
 	var init = function() {};
 	$0
-  return { init: init };
+	return { init: init };
 }());
 
 module.exports = $1;
