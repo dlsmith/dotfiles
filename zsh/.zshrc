@@ -25,12 +25,7 @@ alias tmd="tmux detach"
 alias tma="tmux attach -t"
 alias tms="tmux switch -t"
 
-# Random aliases.
-alias idk="vim ${HOME}/source/notes/uncategorized/idk.md"
-
 alias lsl="ls -lh"
-
-alias ipybl="ipython --profile bodylabs"
 
 function gch {
     if [[ $# -eq 0 ]]; then
@@ -43,7 +38,17 @@ function gch {
     fi
 
     current_branch=$(git rev-parse --abbrev-ref HEAD)
-    git diff --name-only "${base_branch}..${current_branch}"
+    git diff --name-only "${base_branch}..${current_branch}" | cat
+}
+
+function gpush {
+    current_branch=$(git rev-parse --abbrev-ref HEAD)
+    git push -u origin $current_branch
+}
+
+function allvim {
+    # Expects a line-by-line list of files to edit. `cat` receives `stdin`.
+    vim -p $(cat | tr '\n' ' ')
 }
 
 # Homebrew nvm.
