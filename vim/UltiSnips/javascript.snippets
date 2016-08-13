@@ -4,8 +4,12 @@ for (var ${1:i} = 0, len = ${2:array}.length; $1 < len; ++$1) {
 }
 endsnippet
 
+snippet debug "Log a JSON object for debug"
+console.log(JSON.stringify(${1}, null, 4));${0}
+endsnippet
+
 snippet fn "Create named function"
-function ${1:name}(${2}) {
+function (${1}) {
 	$0
 }
 endsnippet
@@ -24,4 +28,8 @@ var ${1:ModuleName} = (function() {
 }());
 
 module.exports = $1;
+endsnippet
+
+snippet it "Create test"
+it('${1:Description}'${2});$0
 endsnippet

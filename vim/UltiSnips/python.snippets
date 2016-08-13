@@ -1,3 +1,32 @@
+snippet main "Main function"
+def main():
+	import argparse
+
+	parser = argparse.ArgumentParser()
+	${1:args}
+	args = parser.parse_args()
+
+	${0}
+
+if __name__ == '__main__':
+	main()
+endsnippet
+
+snippet cl "Class"
+class ${1:name}(object):
+	def __init__(self):
+		pass
+	
+	${0}
+endsnippet
+
+snippet imshow "Show an image with matplotlib"
+import matplotlib.pyplot as plt
+plt.imshow(${1:image}, cmap='jet')
+plt.colorbar()
+plt.show()
+endsnippet
+
 snippet barg "Boolean argparse flag"
 parser.add_argument(
 	'--${1:name}', action='store_true', help='${2}')
@@ -28,4 +57,26 @@ endsnippet
 snippet ri "Raw input"
 raw_input('${1:...}')
 ${0}
+endsnippet
+
+snippet tempdir "Create and/or cleanup temporary directory"
+import tempfile
+temp_dir = tempfile.mkdtemp()
+
+# ...
+
+import shutil
+shutil.rmtree(temp_dir)
+endsnippet
+
+snippet abc "Abstract base class pattern"
+import abc
+
+
+class Something(object):
+	__metaclass__ = abc.ABCMeta
+
+	@abc.abstractmethod
+	def do_thing(self):
+		pass
 endsnippet
