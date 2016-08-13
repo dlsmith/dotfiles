@@ -22,9 +22,16 @@
 	b = branch -v
 	s = status
 	c = commit
+	l = log --oneline --graph
 [diff]
 	tool = mvimdiff
 [difftool]
 	prompt = false
 [difftool "mvimdiff"]
     cmd = mvim -f -d \"$LOCAL\" \"$REMOTE\"
+[credential]
+	helper = osxkeychain
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
