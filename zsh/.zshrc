@@ -27,6 +27,9 @@ alias tms="tmux switch -t"
 
 alias lsl="ls -lh"
 
+# Make sure we use the virtualenv if installed.
+alias nose2="venv/bin/python $(which nose2)"
+
 function gch {
     if [[ $# -eq 0 ]]; then
         base_branch="origin/master" 
