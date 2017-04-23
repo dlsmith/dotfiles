@@ -1,12 +1,23 @@
+snippet mpl "Import matplotlib with agg"
+import matplotlib as mpl
+mpl.use('agg')
+from matplotlib import pyplot as plt
+endsnippet
+
+snippet future "Future imports"
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+endsnippet
+
 snippet main "Main function"
 def main():
 	import argparse
 
 	parser = argparse.ArgumentParser()
-	${1:args}
+	${0:args}
 	args = parser.parse_args()
 
-	${0}
 
 if __name__ == '__main__':
 	main()
@@ -79,4 +90,11 @@ class Something(object):
 	@abc.abstractmethod
 	def do_thing(self):
 		pass
+endsnippet
+
+snippet zero_safe "Context for zero-safe operations (e.g., division, log)"
+with np.errstate(divide='ignore', invalid='ignore'):
+	${1:result} = ${2:expr}
+	$1[~np.isfinite($1)] = 0
+$0
 endsnippet
