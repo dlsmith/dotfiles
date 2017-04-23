@@ -15,6 +15,12 @@ export EDITOR='vim'
 PATH=$PATH:$HOME/.rvm/bin
 PATH=/usr/local/bin:/usr/local/sbin:$PATH:${HOME}/code/scripts
 
+# Homebrew nvm.
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
+# ################################ Aliases ################################## #
+
 # Fix colors in tmux.
 alias tmux="TERM=screen-256color-bce tmux"
 
@@ -27,8 +33,7 @@ alias tms="tmux switch -t"
 
 alias lsl="ls -lh"
 
-# Make sure we use the virtualenv if installed.
-alias nose2="venv/bin/python $(which nose2)"
+# ########################## Miscellaneous functions ######################## #
 
 function gch {
     if [[ $# -eq 0 ]]; then
@@ -44,6 +49,16 @@ function gch {
     git diff --name-only "${base_branch}..${current_branch}" | cat
 }
 
+# Generate a tar file from a git repository.
+function garchive {
+    if [[ $# -ne 1 ]]; then
+        echo "Expected archive path"
+        return
+    fi
+
+    git archive --format=tar --output $1 HEAD
+}
+
 function gpush {
     current_branch=$(git rev-parse --abbrev-ref HEAD)
     git push -u origin $current_branch
@@ -54,10 +69,20 @@ function allvim {
     vim -p $(cat | tr '\n' ' ')
 }
 
-# Homebrew nvm.
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+# Python virtualenv hack to deal with some broken packages.
+function vpython {
+    if [[ ! -z "$VIRTUAL_ENV" ]]; then
+        PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python "$@"
+    else
+        /usr/local/bin/python "$@"
+    fi
+}
 
+# ########################## External configuration ######################## #
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Bodylabs-specific shell configuration.
 BLZSHRC=$HOME/code/dotfiles/zsh/.bodylabs_zshrc
 if [ -e $BLZSHRC ]; then
   source $BLZSHRC
