@@ -12,15 +12,42 @@ endsnippet
 
 snippet main "Main function"
 def main():
-	import argparse
-
-	parser = argparse.ArgumentParser()
-	${0:args}
-	args = parser.parse_args()
-
+	pass
 
 if __name__ == '__main__':
 	main()
+endsnippet
+
+snippet app "Main based on plumbum Application"
+from plumbum import cli
+
+
+class ${1:App}(cli.Application):
+	${0:args}
+
+	def main(self):
+		pass
+
+
+if __name__ == '__main__':
+	$1().run()
+endsnippet
+
+snippet cliflag "Application flag"
+${1:name} = cli.Flag(['--${2:flag name}'], help='${3:Description}')
+endsnippet
+
+snippet cliswitch "Application switch attribute"
+${1:name} = cli.SwitchAttr(
+	['--${2:flag name}'],
+	mandatory=True,
+	argtype=str,
+	default=None,
+	help='${3:Description}')
+endsnippet
+
+snippet cliset "Set type for Application switch"
+Set('${1:first}'${2:, 'second'}, case_sensitive=False)
 endsnippet
 
 snippet cl "Class"
@@ -38,6 +65,13 @@ plt.colorbar()
 plt.show()
 endsnippet
 
+snippet argparse "Setup for an ArgumentParser"
+import argparse
+parser = argparse.ArgumentParser()
+${1:arguments}
+args = parser.parse_args()
+endsnippet
+
 snippet barg "Boolean argparse flag"
 parser.add_argument(
 	'--${1:name}', action='store_true', help='${2}')
@@ -51,13 +85,6 @@ endsnippet
 snippet earg "Enum argparse flag"
 parser.add_argument(
 	'--${1:name}', default=None, choices=[${2}], required=True, help='${3}')
-endsnippet
-
-snippet argparse "Setup for an ArgumentParser"
-import argparse
-parser = argparse.ArgumentParser()
-${1:arguments}
-args = parser.parse_args()
 endsnippet
 
 snippet break "Set a breakpoint"
