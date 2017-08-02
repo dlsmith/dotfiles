@@ -4,13 +4,19 @@ Command line dot files
 cd dotfiles
 
 # zsh.
-ln -s zsh/.zshrc ~/.zshrc
+ln -s ${pwd}/zsh/.zshrc ~/.zshrc
+chsh -s `which zsh`
 
 # vim.
-ln -s vim/.vimrc ~/.vimrc
-ln -s vim/UltiSnips ~/.vim/UltiSnips
-ln -s vim/colors ~/.vim/colors
+mkdir ~/.vim
+mkdir ~/.vim/tmp
+ln -s ${pwd}/vim/.vimrc ~/.vimrc
+ln -s ${pwd}/vim/UltiSnips ~/.vim/UltiSnips
+
+# Install vim-plug. Run :PlugInstall after.
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # git.
-ln -s git/.gitconfig ~/.gitconfig
+ln -s ${pwd}/git/.gitconfig ~/.gitconfig
 ```
