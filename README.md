@@ -10,6 +10,7 @@ chsh -s `which zsh`
 # vim.
 mkdir ~/.vim
 mkdir ~/.vim/tmp
+mkdir ~/.vim/backup
 ln -s $(pwd)/vim/.vimrc ~/.vimrc
 ln -s $(pwd)/vim/UltiSnips ~/.vim/UltiSnips
 
