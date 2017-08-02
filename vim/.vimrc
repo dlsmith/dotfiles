@@ -16,7 +16,7 @@ Plug 'groenewege/vim-less'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
-Plug 'marijnh/tern_for_vim'
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 Plug 'mileszs/ack.vim'
 Plug 'mtth/scratch.vim'
 Plug 'plasticboy/vim-markdown'
@@ -246,6 +246,7 @@ let g:instant_markdown_autostart = 0
 " Remove default <TAB> bindings, which are used for snippets.
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:ycm_goto_buffer_command = 'new-tab'
 nnoremap <silent> <leader>jd :YcmCompleter GoTo<CR>
 
 " Syntastic.
