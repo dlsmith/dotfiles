@@ -23,6 +23,8 @@
 	s = status
 	c = commit
 	l = log --oneline --graph
+	graph = log --graph --all --decorate --stat --date=iso
+	stats = shortlog -sn
 [diff]
 	tool = mvimdiff
 [difftool]
