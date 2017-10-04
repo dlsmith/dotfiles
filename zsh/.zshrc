@@ -13,7 +13,7 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 
 PATH=$PATH:$HOME/.rvm/bin
-PATH=/usr/local/bin:/usr/local/sbin:$PATH:${HOME}/code/scripts
+PATH=/usr/local/bin:/usr/local/sbin:$PATH:${HOME}
 
 # Homebrew nvm.
 export NVM_DIR=~/.nvm
