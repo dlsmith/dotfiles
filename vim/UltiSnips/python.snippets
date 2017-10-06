@@ -125,3 +125,15 @@ with np.errstate(divide='ignore', invalid='ignore'):
 	$1[~np.isfinite($1)] = 0
 $0
 endsnippet
+
+
+snippet tftest "TensorFlow unit test"
+import tensorflow as tf
+
+class ${1:TestClass}(tf.test.TestCase):
+	def setUp(self):
+		super($1, self).setUp()
+
+	def test_something(self):
+		pass
+endsnippet
