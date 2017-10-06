@@ -4,6 +4,8 @@ Command line dot files
 cd dotfiles
 
 # zsh.
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+rm ~/.zshrc
 ln -s $(pwd)/zsh/.zshrc ~/.zshrc
 chsh -s `which zsh`
 

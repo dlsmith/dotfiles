@@ -10,10 +10,11 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Personal settings.
-export EDITOR='vim'
+export EDITOR="vim"
 
-PATH=$PATH:$HOME/.rvm/bin
-PATH=/usr/local/bin:/usr/local/sbin:$PATH:${HOME}/code/scripts
+export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="/usr/local/bin:$PATH:${HOME}"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # Homebrew nvm.
 export NVM_DIR=~/.nvm
