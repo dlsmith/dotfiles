@@ -12,6 +12,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bogado/file-line'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'groenewege/vim-less'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -247,7 +248,9 @@ let g:instant_markdown_autostart = 0
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_goto_buffer_command = 'new-tab'
-nnoremap <silent> <leader>jd :YcmCompleter GoTo<CR>
+nnoremap <silent> <leader>yd :YcmCompleter GoTo<CR>
+nnoremap <silent> <leader>yr :YcmCompleter GoToReferences<CR>
+nnoremap <silent> <leader>yh :YcmCompleter GetDoc<CR>
 
 " Syntastic.
 set statusline+=%#warningmsg#
