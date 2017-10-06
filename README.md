@@ -13,6 +13,7 @@ mkdir ~/.vim/tmp
 mkdir ~/.vim/backup
 ln -s $(pwd)/vim/.vimrc ~/.vimrc
 ln -s $(pwd)/vim/UltiSnips ~/.vim/UltiSnips
+ln -s $(pwd)/vim/ftplugin ~/.vim/ftplugin
 
 # Install vim-plug. Run :PlugInstall after.
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
