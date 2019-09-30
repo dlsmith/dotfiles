@@ -227,8 +227,8 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 nnoremap <leader>es :UltiSnipsEdit<cr>
 
 " Code format.
-nnoremap <leader>ff :FormatCode yapf<CR>
-vnoremap <leader>fl :FormatLines yapf<CR>
+nnoremap <silent> <leader>ff :FormatCode yapf<CR>
+vnoremap <silent> <leader>fl :FormatLines yapf<CR>
 
 augroup autoformat_settings
   " autocmd FileType bzl AutoFormatBuffer buildifier
