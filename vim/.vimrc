@@ -1,5 +1,6 @@
 set nocompatible
 let mapleader=","
+let maplocalleader = "\\"
 filetype off
 
 " =========================== Package installation =========================== "
@@ -7,23 +8,21 @@ filetype off
 call plug#begin('~/.vim/plugged')
 
 Plug 'SirVer/ultisnips'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bogado/file-line'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'groenewege/vim-less'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'lervag/vimtex'
 Plug 'majutsushi/tagbar'
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+Plug 'mbbill/undotree'
 Plug 'mileszs/ack.vim'
 Plug 'mtth/scratch.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
-Plug 'suan/vim-instant-markdown'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
@@ -61,7 +60,7 @@ set ruler
 set shell=/bin/bash
 
 " Enable some helpful programming settings
-set textwidth=79
+set textwidth=88
 set shiftwidth=4
 set tabstop=4
 set expandtab
@@ -81,8 +80,8 @@ syntax enable
 set list
 set listchars=tab:▸\ 
 
-" Highlight column after 80 chars.
-set colorcolumn=81
+" Highlight column after 88 chars.
+set colorcolumn=89
 
 " Set line wrap
 set wm=2
@@ -185,13 +184,6 @@ nnoremap gj j
 nnoremap L gt
 nnoremap H gT
 
-" Make moving between splits easier. Uncomment if not using
-" vim-tmux-naviagotor.
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-l> <C-w>l
-
 " Simple Emacs navigation in insert mode.
 inoremap <C-a> <Esc>I
 inoremap <C-e> <Esc>A
@@ -214,6 +206,9 @@ inoremap <C-k> <Esc><Right>DA
 
 " ========================= Package configuration =========================== "
 
+" Undotree.
+nnoremap <silent> <leader>vu :UndotreeToggle<CR>
+
 " Change color scheme.
 " Solarized: don't forget to download and load the custom colors preset for
 " your terminal emulator.
@@ -232,8 +227,19 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 nnoremap <leader>es :UltiSnipsEdit<cr>
 
 " Code format.
-nnoremap <leader>ff :FormatCode<CR>
-vnoremap <leader>fl :FormatLines<CR>
+nnoremap <leader>ff :FormatCode yapf<CR>
+vnoremap <leader>fl :FormatLines yapf<CR>
+
+augroup autoformat_settings
+  " autocmd FileType bzl AutoFormatBuffer buildifier
+  " autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  " autocmd FileType dart AutoFormatBuffer dartfmt
+  " autocmd FileType go AutoFormatBuffer gofmt
+  " autocmd FileType gn AutoFormatBuffer gn
+  " autocmd FileType html,css,json AutoFormatBuffer js-beautify
+  " autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+augroup END
 
 " Markdown Vim Mode.
 " Disable folding.
@@ -243,30 +249,16 @@ let g:instant_markdown_slow = 1
 " Don't auto-preview. Trigger with :InstantMarkdownPreview
 let g:instant_markdown_autostart = 0
 
-" YouCompleteMe.
-" Remove default <TAB> bindings, which are used for snippets.
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:ycm_goto_buffer_command = 'new-tab'
-nnoremap <silent> <leader>yd :YcmCompleter GoTo<CR>
-nnoremap <silent> <leader>yr :YcmCompleter GoToReferences<CR>
-nnoremap <silent> <leader>yh :YcmCompleter GetDoc<CR>
+" Markdown preview.
+let vim_markdown_preview_github=0
+let vim_markdown_preview_browser='Google Chrome'
 
-" Syntastic.
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_loc_list_height = 5
-
-nnoremap <leader>sc :SyntasticCheck<CR>
-nnoremap <leader>sl :Errors<CR>
-nnoremap <leader>sr :SyntasticReset<CR>
-nnoremap <leader>st :SyntasticToggle<CR>
+" Vimtex
+let g:vimtex_view_automatic = 0
+let g:vimtex_compiler_latexmk = {
+    \ 'background' : 1,
+    \ 'continuous' : 0,
+    \}
 
 " Checkers configuration.
 " See https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers
@@ -291,10 +283,10 @@ nnoremap <silent> <leader>t :FzfFiles<CR>
 let g:tagbar_width = 50
 let g:tagbar_autofocus = 1
 let g:tagbar_autoshowtag = 1
-nmap <leader>vt :TagbarToggle<CR>
+nnoremap <silent> <leader>vt :TagbarToggle<CR>
 
 " NERDTree.
 let g:NERDTreeWinSize = 50 
-nmap <leader>vn :NERDTreeToggle<CR>
+nnoremap <silent> <leader>vn :NERDTreeToggle<CR>
 
 filetype plugin indent on
