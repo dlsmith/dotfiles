@@ -1,6 +1,6 @@
 snippet mpl "Import matplotlib with agg"
 import matplotlib as mpl
-mpl.use('agg')
+mpl.use('agg')  # Or 'TkAgg' for on screen.
 from matplotlib import pyplot as plt
 endsnippet
 
@@ -11,8 +11,20 @@ from __future__ import print_function
 endsnippet
 
 snippet main "Main function"
+import argparse
+
+
+def parse_args():
+	parser = argparse.ArgumentParser()
+	${1:arguments}
+	return parser.parse_args()
+
+
 def main():
-	pass
+	args = parse_args()
+
+	${0}
+
 
 if __name__ == '__main__':
 	main()
@@ -66,10 +78,13 @@ plt.show()
 endsnippet
 
 snippet argparse "Setup for an ArgumentParser"
-import argparse
-parser = argparse.ArgumentParser()
-${1:arguments}
-args = parser.parse_args()
+def parse_args():
+	import argparse
+
+	parser = argparse.ArgumentParser()
+	${1:arguments}
+
+	return parser.parse_args()
 endsnippet
 
 snippet barg "Boolean argparse flag"
@@ -88,8 +103,8 @@ parser.add_argument(
 endsnippet
 
 snippet break "Set a breakpoint"
-import pdb
-pdb.set_trace()
+import ipdb as pdb
+pdb.set_trace(context=5)
 endsnippet
 
 snippet ri "Raw input"
@@ -136,4 +151,77 @@ class ${1:TestClass}(tf.test.TestCase):
 
 	def test_something(self):
 		pass
+endsnippet
+
+snippet tfdebug "TensorFlow debugger"
+from tensorflow.python import debug as tf_debug
+
+sess = tf_debug.LocalCLIDebugWrapperSession(sess)
+endsnippet
+
+snippet logger "Simple logger setup"
+import logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+endsnippet
+
+snippet timestamp "Timestamp string"
+from datetime import datetime
+timestamp = datetime.now().isoformat()
+endsnippet
+
+snippet exit "Exit process"
+raise SystemExit()
+endsnippet
+
+snippet todo "Personal TODO"
+# TODO(dlsmith): ${0}
+endsnippet
+
+snippet fixme "Personal FIXME"
+# FIXME(dlsmith): ${0}
+endsnippet
+
+snippet fstub "Function stub"
+def ${1:fn}(${2:args}):
+	raise NotImplementedError()
+${0}
+endsnippet
+
+snippet mkdirp "Helper function for mkdir -p"
+from os import path as osp
+import os
+
+def makedirs(d):
+	if not osp.isdir(d):
+		os.makedirs(d)
+	return d
+endsnippet
+
+snippet profile "Simple context manager to profile a block of code"
+import contextlib
+
+@contextlib.contextmanager
+def profile(desc, fmt='{:.2f}'):
+	start_s = time.time()
+	yield
+	print(desc, '...', fmt.format(time.time() - start_s), 's')
+${0}
+endsnippet
+
+snippet hash "Hash a string"
+import hashlib
+hashlib.md5(value.encode('utf-8')).hexdigest()
+endsnippet
+
+snippet timer "Timer as a context manager"
+import contextlib
+import time
+@contextlib.contextmanager
+def timed(desc):
+	start = time.time()
+	print('{}...  '.format(desc), end='')
+	yield
+	elapsed = time.time() - start
+	print('{:.2f} ms'.format(elapsed * 1000))
 endsnippet
