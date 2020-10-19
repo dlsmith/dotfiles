@@ -29,3 +29,18 @@ ln -s $(pwd)/tmux/.tmux.conf ~/.tmux.conf
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # <prefix> + I to install plugins.
 ```
+
+### Spacemacs
+
+Mac OS
+
+```
+brew tap d12frosted/emacs-plus
+brew install emacs-plus
+ln -s /usr/local/opt/emacs-plus@27/Emacs.app /Applications
+```
+
+```
+git clone https://github.com/syl20bnr/spacemacs "${HOME}/.emacs.d"
+ln -s "$(pwd)/spacemacs/.spacemacs" "${HOME}/.spacemacs"
+```
