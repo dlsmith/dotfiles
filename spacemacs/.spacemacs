@@ -32,7 +32,11 @@ values."
    dotspacemacs-configuration-layers
    '(
      javascript
-     python
+     (python :variables
+        python-formatter 'yapf
+        ;; python-format-on-save t
+        ;; python-sort-imports-on-save t
+        python-test-runner 'pytest)
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
